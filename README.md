@@ -1,5 +1,5 @@
 # Description
-Nest.js Startup project. Use this project as base to others
+Nestjs Startup project. Use this project as base to others
 
 ## Features
 - NodeJs backend written in Typescript

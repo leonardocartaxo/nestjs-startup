@@ -6,8 +6,9 @@ import { UserCreateDto, UserDto } from '../users/dtos/users.dto';
 import { AuthenticationResponse, IJwtPayload, Login } from './dtos/authDtos';
 import { User } from '../users/entities/user.entity';
 
-// to env
-const SALT = '1d8b84e4a115eea3f32ea772070238ab832bcd72b2fb59566c6e13e21c5d99db';
+process.env.SALT =
+  process.env.SALT ||
+  '1d8b84e4a115eea3f32ea772070238ab832bcd72b2fb59566c6e13e21c5d99db';
 
 @Injectable()
 export class AuthService {
@@ -45,7 +46,10 @@ export class AuthService {
   }
 
   private static encryptPassword(password: string): string {
-    return crypto.createHmac('sha1', SALT).update(password).digest('hex');
+    return crypto
+      .createHmac('sha1', process.env.SALT)
+      .update(password)
+      .digest('hex');
     // more secure – return crypto.pbkdf2Sync(password, this.salt, 10000, 512);
   }
 

@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    command: npm run migrateAndStart
+    ports:
+      - "3000:3000"
+    environment:      
+      - DB_NAME=netsjs-startup
+      - DB_HOST=postgres
+      - JWT_SECRET=d6e00f955d396ca239875c5de15a58d3
+      - SALT=1d8b84e4a115eea3f32ea772070238ab832bcd72b2fb59566c6e13e21c5d99db
+    volumes:
+      - ".:/usr/app"
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: netsjs-startup
+      
