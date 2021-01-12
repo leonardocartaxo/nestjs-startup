@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Roles } from 'src/auth/Roles';
 import { User } from '../entities/user.entity';
 
 export class UserDto {
@@ -8,11 +9,14 @@ export class UserDto {
   name: string;
   @ApiProperty()
   email: string;
+  @ApiProperty()
+  roles: Roles[];
 
   constructor(user: User) {
     this.id = user.id;
     this.name = user.name;
     this.email = user.email;
+    this.roles = user.roles;
   }
 }
 

@@ -8,6 +8,7 @@ import DbConfig from '../ormconfig.js';
 const dbConfig = DbConfig as any;
 dbConfig.entities = [User];
 dbConfig.migrations = null;
+// dbConfig.synchronize = true;
 dbConfig.host = process.env.DB_HOST;
 
 @Module({

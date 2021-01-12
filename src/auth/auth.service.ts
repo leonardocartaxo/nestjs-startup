@@ -5,6 +5,7 @@ import * as crypto from 'crypto';
 import { UserCreateDto, UserDto } from '../users/dtos/users.dto';
 import { AuthenticationResponse, IJwtPayload, Login } from './dtos/authDtos';
 import { User } from '../users/entities/user.entity';
+import { Roles } from './Roles';
 
 process.env.SALT =
   process.env.SALT ||
@@ -22,6 +23,7 @@ export class AuthService {
       hashedPassword: AuthService.encryptPassword(userCreateDto.password),
       email: userCreateDto.email,
       name: userCreateDto.name,
+      roles: [Roles.USER],
     };
 
     const userDto = await this.usersService.create(user);
@@ -67,6 +69,7 @@ export class AuthService {
       id: userDto.id,
       email: userDto.email,
       name: userDto.name,
+      roles: userDto.roles,
     };
 
     return {

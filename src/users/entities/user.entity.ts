@@ -1,4 +1,5 @@
 import { Exclude } from 'class-transformer';
+import { Roles } from '../../auth/Roles';
 import {
   Column,
   CreateDateColumn,
@@ -31,4 +32,7 @@ export class User {
   @Column({ nullable: false })
   @Exclude()
   hashedPassword: string;
+
+  @Column('varchar', { array: true, default: '{USER}' })
+  roles: Roles[];
 }

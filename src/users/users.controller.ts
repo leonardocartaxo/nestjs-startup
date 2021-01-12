@@ -18,6 +18,9 @@ import {
 import { UsersService } from './users.service';
 import { UserDto as UserDto, UserUpdateDto } from './dtos/users.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesAllowed } from 'src/auth/decorators/roles.decorator';
+import { Roles } from 'src/auth/Roles';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @ApiTags('users')
 @Controller('users')
@@ -26,8 +29,9 @@ export class UsersController {
 
   @Get()
   @UseInterceptors(ClassSerializerInterceptor)
-  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @RolesAllowed(Roles.ADMIN)
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({
     status: 200,
@@ -52,8 +56,9 @@ export class UsersController {
 
   @Put(':id')
   @UseInterceptors(ClassSerializerInterceptor)
-  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @RolesAllowed(Roles.ADMIN)
   @ApiOperation({ summary: 'Update one user by id' })
   @ApiResponse({
     status: 200,
@@ -68,8 +73,9 @@ export class UsersController {
 
   @Delete(':id')
   @UseInterceptors(ClassSerializerInterceptor)
-  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @RolesAllowed(Roles.ADMIN)
   @ApiOperation({ summary: 'Delete one user by id' })
   @ApiResponse({
     status: 200,
