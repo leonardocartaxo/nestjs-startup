@@ -7,14 +7,14 @@ module.exports = {
       category: 'http',
     },
     app: {
-      type: 'file',
+      type: 'dateFile',
       filename: 'logs/app.log',
-      maxLogSize: 10485760,
-      numBackups: 3,
+      pattern: '-yyyy-MM-dd',
     },
     errorFile: {
-      type: 'file',
+      type: 'dateFile',
       filename: 'logs/errors.log',
+      pattern: '-yyyy-MM-dd',
     },
     errors: {
       type: 'logLevelFilter',

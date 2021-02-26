@@ -3,12 +3,16 @@ Nestjs Startup project. Use this project as base to others
 
 ## Features
 - NodeJs backend written in Typescript
-- Using architecture of <a href="http://nodejs.com" target="blank">Nestjs</a> 
+- Using modular and dependency injection architecture of <a href="http://nodejs.com" target="blank">Nestjs</a> 
 - Swagger documentation
-- MongoDB
-- Integration tests
+- Postgres
+- Postgres data base migration
+- TypeOrm
+- Unity tests
 - End to end tests
 - Docker componentization
+- Error handling
+- Log4js integration
 
 ### Run using Docker
 ```bash
