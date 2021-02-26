@@ -2,11 +2,15 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ClassSerializerInterceptor } from '@nestjs/common';
+import { Log4jsService } from 'nestjs-log4js';
 
 process.env.APP_PORT = process.env.APP_PORT || `3000`;
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: false,
+  });
+  app.useLogger(app.get(Log4jsService));
 
   const options = new DocumentBuilder()
     .setTitle('Nest.js Startup project')

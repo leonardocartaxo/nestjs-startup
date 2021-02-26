@@ -11,6 +11,7 @@ import InternalServerError from '../entities/internal-server-error';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
+  private readonly logger = new Logger(HttpExceptionFilter.name);
   public internalServerError: InternalServerError;
 
   catch(exception: HttpException, host: ArgumentsHost) {
@@ -35,7 +36,7 @@ export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
         : null,
     };
 
-    Logger.error(
+    this.logger.error(
       `${request.method} ${request.url}`,
       exception.stack,
       'HttpExceptionFilter',
